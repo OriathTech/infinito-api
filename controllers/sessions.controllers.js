@@ -17,6 +17,23 @@ export const getSession = async (req, res, next) => {
     });
 }
 
+export const logout = async (req, res, next) => {
+    const user = req.user;
+    if (user) {
+        return res.status(200).json({
+            status: "success",
+            message: "Se ha encontrado los datos de la sesión.",
+            payload: user
+        });
+    }
+
+    return res.status(400).json({
+        status: "error",
+        message: "No se ha podido encontrar los datos de la sesión.",
+        error: "Hubo un problema en el servidor."
+    });
+}
+
 export const postLogin = async (req, res, next) => {
     const info = req.body;
 
@@ -35,7 +52,7 @@ export const postLogin = async (req, res, next) => {
         return res.status(200).json({
             status: "success",
             message: "Estas logeado.",
-            payload: response.user
+            payload: response.payload
         });
 
     } catch (error) {
@@ -76,9 +93,10 @@ export const postRegister = async (req, res, next) => {
 }
 
 export const postRegisterConfirmation = async (req, res, next) => {
-    const info = req.body;
+    const confirmationToken = req.body.token;
+
     try {
-        const response = await serv.registerUser(info);
+        const response = await serv.registerUser(confirmationToken);
 
         if (response.status === "error") {
             return res.status(422).json({
@@ -92,7 +110,7 @@ export const postRegisterConfirmation = async (req, res, next) => {
         return res.status(200).json({
             status: "success",
             message: "Te has registrado correctamente.",
-            payload: response.user
+            payload: response.payload
         });
 
     } catch (error) {
@@ -147,6 +165,7 @@ export const postResetPassword = async (req, res, next) => {
         return res.status(200).json({
             status: "success",
             message: "Se ha actualizado la contraseña.",
+            payload: response.payload
         });
 
     } catch (error) {

@@ -47,6 +47,14 @@ export const updateOneById = async (model, id, info) => {
     }
 }
 
+export const updateOneByFilter = async (model, filter, info) => {
+    try {
+        return await model.findOneAndUpdate(filter, info, { new: true });
+    } catch (error) {
+        throw error;
+    }
+}
+
 export const updateManyByFilter = async (model, filter, info) => {
     try {
         return await model.updateMany(filter, info, { new: true });

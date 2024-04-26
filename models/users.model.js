@@ -44,11 +44,11 @@ const userSchema = new Schema({
     },
     floor: {
         type: String,
-        default: null
+        default: ""
     },
     apartment: {
         type: String,
-        default: null
+        default: ""
     },
     observations: {
         type: String,

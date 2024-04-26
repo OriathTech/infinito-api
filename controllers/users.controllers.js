@@ -21,7 +21,7 @@ export const getUsers = async (req, res, next) => {
 
 export const putUser = async (req, res, next) => {
     const info = req.body;
-    const uid = req.params.uid;
+    const uid = req.user._id;
     try {
         const response = await serv.updateUserById(uid, info);
 

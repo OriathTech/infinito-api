@@ -11,6 +11,6 @@ routerProducts.get('/:pid', getProduct);
 routerProducts.post('/', auth('jwt'), roleValidation(["admin"]), postProduct);
 
 routerProducts.put('/:pid', auth('jwt'), roleValidation(["admin"]), putProduct);
-routerProducts.put('/:pid', auth('jwt'), roleValidation(["admin"]), putProductThumbnail);
+routerProducts.put('/:pid/thumbnail', auth('jwt'), roleValidation(["admin"]), putProductThumbnail);
 
 routerProducts.delete('/:pid', auth('jwt'), roleValidation(["admin"]),deleteProduct);

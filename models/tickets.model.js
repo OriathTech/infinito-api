@@ -1,6 +1,10 @@
 import { Schema, model } from "mongoose";
 
 const ticketSchema = new Schema({
+  userId: {
+    type: String,
+    required: true
+  },
   products: {
     type: [
       {
@@ -8,7 +12,7 @@ const ticketSchema = new Schema({
           type: String,
           required: true
         },
-        size: {
+        width: {
           type: Number,
           required: true
         },
@@ -19,30 +23,32 @@ const ticketSchema = new Schema({
         totalPrice: {
           type: Number,
           required: true
+        },
+        unitaryPrice: {
+          type: Number,
+          required: true
         }
       }
     ],
     default: []
   },
+  status: {
+    type: Boolean,
+    default: false
+  },
   deliberyFee: {
     type: Number,
     default: 0
   },
-  reference: {
-    type: String,
-    default: ""
+  total: {
+    type: Number,
+    required: true
   },
   purchaseDate: {
     type: String,
     enum: [],
     default: ""
-  },
-  expitarionDate: {
-    type: String,
-    enum: [],
-    default: ""
   }
-
 })
 
 const ticketModel = model("tickets", ticketSchema);

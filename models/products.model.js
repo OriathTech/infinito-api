@@ -1,4 +1,5 @@
 import { Schema, model } from "mongoose";
+import * as e from "../utils/enums/enums";
 
 const productSchema = new Schema({
     name: {
@@ -8,43 +9,48 @@ const productSchema = new Schema({
     },
     priceCode: {
         type: String,
-        default: ""
+        required: true
     },
     line: {
         type: String,
-        enum: [],
-        default: ""
+        enum: [e.lines],
+        required: true
     },
     style: {
         type: String,
-        enum: [],
-        default: ""
+        enum: [e.styles],
+        required: true
     },
     size: {
         type: String,
-        enum: [],
-        default: ""
+        enum: [e.sizes],
+        required: true
     },
     shape: {
         type: String,
-        enum: [],
-        default: ""
+        enum: [e.shapes],
+        required: true
     },
     finnish: {
         type: String,
-        enum: [],
-        default: ""
+        enum: [e.finishes],
+        required: true
     },
     color: {
         type: [{
             type: String,
-            enum: []
+            enum: [e.colors]
         }],
-        default: []
+        required: true
     },
     thumbnail: {
         type: String,
         default: ""
+    },
+    status: {
+        type: String,
+        enum: ["online", "offline", "featured"],
+        default: "online"
     }
 })
 
